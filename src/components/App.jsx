@@ -9,29 +9,10 @@ function App() {
   function contactChange(event) {
     const { value, name } = event.target;
     setContact((preValue) => {
-      switch (name) {
-        case "fName":
-          return {
-            fName: value,
-            lName: preValue.lName,
-            email: preValue.email,
-          };
-          break;
-        case "lName":
-          return {
-            fName: preValue.fName,
-            lName: value,
-            email: preValue.email,
-          };
-          break;
-        case "email":
-          return {
-            fName: preValue.fName,
-            lName: preValue.lName,
-            email: value,
-          };
-          break;
-      }
+      return {
+        ...preValue,
+        [name]: value,
+      };
     });
   }
 
@@ -42,9 +23,24 @@ function App() {
       </h1>
       <p>{contact.email}</p>
       <form>
-        <input name="fName" onChange={contactChange} placeholder="First Name" />
-        <input name="lName" onChange={contactChange} placeholder="Last Name" />
-        <input name="email" onChange={contactChange} placeholder="Email" />
+        <input
+          name="fName"
+          value={contact.fName}
+          onChange={contactChange}
+          placeholder="First Name"
+        />
+        <input
+          name="lName"
+          value={contact.lName}
+          onChange={contactChange}
+          placeholder="Last Name"
+        />
+        <input
+          name="email"
+          value={contact.email}
+          onChange={contactChange}
+          placeholder="Email"
+        />
         <button>Submit</button>
       </form>
     </div>
